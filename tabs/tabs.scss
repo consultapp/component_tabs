@@ -1,0 +1,84 @@
+.tabs {
+  $backColor: rgb(255, 255, 255);
+  $accordionBgColor: rgb(178, 189, 225);
+  $fontColor: black;
+  $borderColor: gray;
+  $borderActiveColor: red;
+  $desktopMedia: "(min-width: 480px)";
+
+  background: $backColor;
+  color: $fontColor;
+
+  &__radio {
+    position: absolute;
+    opacity: 0;
+    left: -100vw;
+  }
+
+  &__labelContainer {
+    margin: 5px;
+    padding: 10px;
+    background-color: $accordionBgColor;
+    border-radius: 8px;
+
+    @media screen and #{$desktopMedia} {
+      margin: 0;
+      padding: 10px 10px 0 10px;
+      background-color: transparent;
+      border-bottom: 5px solid $borderColor;
+      border-radius: 0px;
+    }
+  }
+
+  &__desktopLineFiller {
+    display: none;
+    @media screen and #{$desktopMedia} {
+      display: block;
+      border-bottom: 5px solid $borderColor;
+      flex-grow: 1;
+    }
+  }
+
+  &__anchor {
+    text-decoration: underline;
+    cursor: pointer;
+
+    @media screen and #{$desktopMedia} {
+      padding-bottom: 0;
+      text-decoration: none;
+    }
+  }
+
+  &__container {
+    position: relative;
+    @media screen and #{$desktopMedia} {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+  }
+
+  &__content {
+    display: none;
+  }
+
+  #tab1:checked ~ * &_1 &__labelContainer,
+  #tab2:checked ~ * &_2 &__labelContainer,
+  #tab3:checked ~ * &_3 &__labelContainer {
+    border-bottom: 0px;
+    @media screen and (min-width: 480px) {
+      border-bottom: 5px solid $borderActiveColor;
+    }
+  }
+
+  #tab1:checked ~ * &_1 &__content,
+  #tab2:checked ~ * &_2 &__content,
+  #tab3:checked ~ * &_3 &__content {
+    display: inherit;
+    @media screen and #{$desktopMedia} {
+      position: absolute;
+      left: 10px;
+      padding-top: 10px;
+    }
+  }
+}
